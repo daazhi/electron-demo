@@ -24,41 +24,156 @@ body, img {
   left: 0;
   top: 0;
   right: 0;
-  height: 48px;
+  height: 66px;
   -webkit-app-region: drag
 }
 .top-bar .btn {
   float: right;
-  width: 146px;
-  height: 48px;
+  width: 225px;
+  height: 66px;
   text-align: center;
 }
 .top-bar .btn span {
   display: inline-block;
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
-  color: #eee;
-  margin: 12px 2.5px;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  /*background: rgba(0,0,0,.5);*/
+  color: transparent;
+  margin: 16px 3px;
+  font-size: 20px;
   -webkit-app-region: no-drag;
-  border-radius: 15px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.top-bar .btn span:nth-child(2) {
+  cursor: default;
 }
 .top-bar .btn span:hover {
-  color: blue;
-  background: rgba(0,0,0,.5);
+  color: #ccc;
 }
 
 .opt {
   position: absolute;
-  width: 60px;
-  height: 120px;
+  width: 105px;
+  height: 165px;
   top: 50%;
-  margin-top: -85px;
+  margin-top: -118px;
   cursor: pointer;
+  background: url("../assets/images/btn-arrow.png") no-repeat center;
+  background-size: 100% 100%;
+}
+.opt:hover {
+  transform: scale(1.05);
 }
 .left {
-  left: 45px;
+  left: 63px;
+  transform: rotateY(180deg);
+}
+.left2 {
+  left: 543px;
+}
+.left:hover {
+  transform: scale(1.05) rotateY(180deg);
 }
 .right {
-  right: 45px;
+  right: 63px;
+}
+
+.bottom-bar {
+  position: absolute;
+  left: 50%;
+  bottom: 51px;
+  width: 921px;
+  height: 95px;
+  margin-left: -493px;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.bottom-bar-left-2 {
+  margin-left: -355px;
+  background: rgba(0,0,0,.5);
+}
+.bottom-bar .item {
+  width: 95px;
+  height: 95px;
+  line-height: 95px;
+  text-align: center;
+  color: #ccc;
+  font-size: 24px;
+  border-radius: 50px;
+  opacity: 0;
+  cursor: pointer;
+}
+.bottom-bar .item:hover {
+  opacity: 1;
+}
+
+.login {
+  position: absolute;
+  right: 275px;
+  top: 335px;
+  width: 584px;
+  height: 355px;
+  font-size: 24px;
+}
+.login input {
+  position: absolute;
+  width: 180px;
+  height: 65px;
+  top: 48px;
+  left: 280px;
+  font-size: inherit;
+  text-align: center;
+  background: transparent;
+  font-family: inherit;
+  border: 0;
+  outline: 0;
+}
+.login .age {
+  position: absolute;
+  width: 204px;
+  height: 65px;
+  line-height: 65px;
+  top: 138px;
+  left: 270px;
+  padding-right: 60px;
+  text-align: center;
+  cursor: pointer;
+}
+.login .age-select {
+  position: absolute;
+  width: 204px;
+  line-height: 45px;
+  top: 210px;
+  left: 270px;
+  text-align: center;
+  overflow: hidden;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 0 5px 2px #dddddd;
+  z-index: 1;
+}
+.login .age-select div {
+  cursor: pointer;
+}
+.login .age-select div:hover {
+  background: #d017dd;
+}
+.login .age-select .active {
+  background: #d017dd;
+}
+.login .btn-enter {
+  position: absolute;
+  width: 218px;
+  height: 75px;
+  top: 247px;
+  left: 185px;
+  background: url("../assets/images/btn-enter.png") no-repeat center;
+  background-size: 100% 100%;
+  cursor: pointer;
+}
+.login .btn-enter:hover {
+  transform: scale(1.05);
 }

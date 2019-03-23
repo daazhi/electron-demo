@@ -4,55 +4,97 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="style/index.css">
   <script src="libs/vue.min.js"></script>
+  <script src="libs/question.js"></script>
   <style>
+    body {
+      font-family: 方正粗圆_GBK;
+    }
   </style>
 </head>
-<body style="">
-
+<body>
 <div id="app" class="container">
   <div class="top-bar">
     <div class="btn">
-      <span @click="min">-</span>
-      <span @click="max">+</span>
-      <span @click="quit">&times;</span>
+      <span @click="min" title="最小化">-</span>
+      <span>&nbsp;</span>
+      <span @click="quit" title="关闭">&times;</span>
     </div>
   </div>
 
   <img class="img-part" :src="src[index]" alt="">
 
-  <div class="opt left" @click="prev"></div>
+  <div class="opt left" :class="{left2: index === 8 || index === 9}" @click="prev"></div>
   <div class="opt right" @click="next"></div>
+
+  <div class="bottom-bar" :class="{'bottom-bar-left-2': index === 8 || index === 9}">
+    <div class="item" @click="index = 0">介绍</div>
+    <div class="item" @click="index = 7">测评</div>
+    <div class="item" @click="index = 0">课程</div>
+    <div class="item" @click="index = 0">价格</div>
+  </div>
+
+  <div v-show="index === 7" class="login">
+    <input type="text" v-model="childName">
+    <div class="age" @click="showAgeSelect = true">{{ageArea[age]}}</div>
+    <div v-show="showAgeSelect" class="age-select">
+      <div :class="{active: age === key}" v-for="(value, key) in ageArea" @click="age = key;showAgeSelect = false">
+        {{value}}
+      </div>
+    </div>
+    <div class="btn-enter" @click="toTesting"></div>
+  </div>
+
 </div>
 
 </body>
 
 <script>
-  const { ipcRenderer } = require('electron')
+  // const { ipcRenderer } = require('electron')
 
   new Vue({
     el: '#app',
     data: {
-      index: 0,
+      index: 9,
       src: [
-        'assets/images/test-01.png',
-        'assets/images/test-02.png',
-        'assets/images/test-03.png',
-        'assets/images/test-04.png',
-        'assets/images/test-05.png',
-        'assets/images/test-06.png'
-      ]
+        'assets/images/introduce/introduce-1.jpg',
+        'assets/images/introduce/introduce-2.jpg',
+        'assets/images/introduce/introduce-3.jpg',
+        'assets/images/introduce/introduce-4.jpg',
+        'assets/images/introduce/introduce-5.jpg',
+        'assets/images/introduce/introduce-6.jpg',
+        'assets/images/introduce/introduce-7.jpg',
+        'assets/images/testing/login.jpg',
+        'assets/images/testing/age6.jpg',
+        'assets/images/testing/question.jpg',
+        'assets/images/testing/result.jpg'
+      ],
+      childName: '',
+      age: 'age6',
+      ageArea: {
+        age6: '0-6个月',
+        age12: '6-12个月',
+        age18: '12-18个月',
+        age24: '18-24个月',
+        age30: '24-30个月',
+        age36: '30-36个月',
+        age48: '3-4个月',
+        age60: '4-5个月',
+      },
+      showAgeSelect: false,
+      question: {}
     },
     mounted() {
+      this.question = window._question
     },
     methods: {
       min() {
-        ipcRenderer.send('win-min')
+        // ipcRenderer.send('win-min')
       },
       max() {
-        ipcRenderer.send('win-max')
+        // ipcRenderer.send('win-max')
       },
       quit() {
-        ipcRenderer.send('win-close')
+        // ipcRenderer.send('win-close')
       },
       prev() {
         if (this.index > 0) {
@@ -60,9 +102,26 @@
         }
       },
       next() {
-        if (this.index < 5) {
+        if (this.index === 7) {
+          this.toTesting()
+          return
+        }
+        if (this.index < this.src.length - 1) {
           this.index++
         }
+      },
+      toTesting() {
+        this.childName = this.childName.trim()
+        if (!this.childName) {
+          alert('请输入宝宝姓名')
+          return
+        }
+        this.index++
+      }
+    },
+    watch: {
+      age(val) {
+        this.src[8] = `assets/images/testing/${val}.jpg`
       }
     }
   })
