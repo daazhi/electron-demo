@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style/index.css">
+  <script src="libs/vue.min.js"></script>
+  <style>
+  </style>
+</head>
+<body style="">
+
+<div id="app" class="container">
+  <div class="top-bar">
+    <div class="btn">
+      <span @click="min">-</span>
+      <span @click="max">+</span>
+      <span @click="quit">&times;</span>
+    </div>
+  </div>
+
+  <img class="img-part" :src="src[index]" alt="">
+
+  <div class="opt left" @click="prev"></div>
+  <div class="opt right" @click="next"></div>
+</div>
+
+</body>
+
+<script>
+  const { ipcRenderer } = require('electron')
+
+  new Vue({
+    el: '#app',
+    data: {
+      index: 0,
+      src: [
+        'assets/images/test-01.png',
+        'assets/images/test-02.png',
+        'assets/images/test-03.png',
+        'assets/images/test-04.png',
+        'assets/images/test-05.png',
+        'assets/images/test-06.png'
+      ]
+    },
+    mounted() {
+    },
+    methods: {
+      min() {
+        ipcRenderer.send('win-min')
+      },
+      max() {
+        ipcRenderer.send('win-max')
+      },
+      quit() {
+        ipcRenderer.send('win-close')
+      },
+      prev() {
+        if (this.index > 0) {
+          this.index--
+        }
+      },
+      next() {
+        if (this.index < 5) {
+          this.index++
+        }
+      }
+    }
+  })
+</script>
+</html>
