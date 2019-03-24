@@ -29,9 +29,7 @@ function createWindow () {
     resizable: false,
     fullscreen: true,
     enableLargerThanScreen: true,
-    // minWidth: 1366,
-    // minHeight: 793,
-    title: 'test',
+    title: '荷乐宝贝',
     icon: 'src/assets/logo1.png',
     webPreferences: {
       nodeIntegration: true

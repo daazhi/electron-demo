@@ -7,7 +7,7 @@
   <script src="libs/question.js"></script>
   <style>
     body {
-      font-family: 方正粗圆_GBK;
+      font-family: 方正粗圆,方正粗圆_GBK;
     }
   </style>
 </head>
@@ -26,7 +26,7 @@
   <div class="opt left" :class="{left2: index === 8 || index === 9}" @click="prev"></div>
   <div class="opt right" @click="next"></div>
 
-  <div class="bottom-bar" :class="{'bottom-bar-left-2': index === 8 || index === 9}">
+  <div v-show="index !== 21" class="bottom-bar" :class="{'bottom-bar-left-2': index === 8 || index === 9}">
     <div class="item" @click="index = 0;qsIndex = 0">介绍</div>
     <div class="item" @click="index = 7;qsIndex = 0">测评</div>
     <div class="item" @click="index = 11;qsIndex = 4">课程</div>
@@ -57,11 +57,11 @@
   </div>
 
   <div v-show="index === 10" class="result">
-    <div class="item bg-1" :style="{height: `${height[0] * h1 - h10}px`}"></div>
-    <div class="item bg-2" :style="{height: `${height[1] * h1 - h10}px`}"></div>
-    <div class="item bg-3" :style="{height: `${height[2] * h1 - h10}px`}"></div>
-    <div class="item bg-4" :style="{height: `${height[3] * h1 - h10}px`}"></div>
-    <div class="item bg-5" :style="{height: `${height[4] * h1 - h10}px`}"></div>
+    <div class="item bg-1" :style="{height: `${(height[0] || 0) * h1 - h10}px`}"></div>
+    <div class="item bg-2" :style="{height: `${(height[1] || 0) * h1 - h10}px`}"></div>
+    <div class="item bg-3" :style="{height: `${(height[2] || 0) * h1 - h10}px`}"></div>
+    <div class="item bg-4" :style="{height: `${(height[3] || 0) * h1 - h10}px`}"></div>
+    <div class="item bg-5" :style="{height: `${(height[4] || 0) * h1 - h10}px`}"></div>
 
     <div class="label">
       <div v-for="name in questionName">{{name}}</div>
@@ -130,8 +130,8 @@
         age24: '18-24个月',
         age30: '24-30个月',
         age36: '30-36个月',
-        age48: '3-4个月',
-        age60: '4-5个月',
+        age48: '3-4岁',
+        age60: '4-5岁',
       },
       showAgeSelect: false,
       showQuestion: true,
