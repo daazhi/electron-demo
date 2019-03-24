@@ -23,9 +23,12 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1920,
     height: 1080,
+    minWidth: 1920,
+    minHeight: 1080,
     frame: false,
     resizable: false,
     fullscreen: true,
+    enableLargerThanScreen: true,
     // minWidth: 1366,
     // minHeight: 793,
     title: 'test',

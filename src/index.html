@@ -12,7 +12,7 @@
   </style>
 </head>
 <body>
-<div id="app" class="container">
+<div id="app" class="container" @click="showAgeSelect = false">
   <div class="top-bar">
     <div class="btn">
       <span @click="min" title="最小化">-</span>
@@ -27,21 +27,63 @@
   <div class="opt right" @click="next"></div>
 
   <div class="bottom-bar" :class="{'bottom-bar-left-2': index === 8 || index === 9}">
-    <div class="item" @click="index = 0">介绍</div>
-    <div class="item" @click="index = 7">测评</div>
-    <div class="item" @click="index = 0">课程</div>
-    <div class="item" @click="index = 0">价格</div>
+    <div class="item" @click="index = 0;qsIndex = 0">介绍</div>
+    <div class="item" @click="index = 7;qsIndex = 0">测评</div>
+    <div class="item" @click="index = 11;qsIndex = 4">课程</div>
+    <div class="item" @click="index = 21;qsIndex = 4">价格</div>
   </div>
 
   <div v-show="index === 7" class="login">
     <input type="text" v-model="childName">
-    <div class="age" @click="showAgeSelect = true">{{ageArea[age]}}</div>
+    <div class="age" @click.stop="showAgeSelect = true">{{ageArea[age]}}</div>
     <div v-show="showAgeSelect" class="age-select">
-      <div :class="{active: age === key}" v-for="(value, key) in ageArea" @click="age = key;showAgeSelect = false">
+      <div :class="{active: age === key}" v-for="(value, key) in ageArea" @click.stop="age = key;showAgeSelect = false">
         {{value}}
       </div>
     </div>
     <div class="btn-enter" @click="toTesting"></div>
+  </div>
+
+  <div v-show="index === 9" class="testing">
+    <span class="title">{{qsIndex + 1}}.{{question.name}}</span>
+    <div v-if="showQuestion" class="item" v-for="(item, pos) in question.qs">
+      <div class="question">{{pos + 1}}.{{item}}</div>
+      <div class="answer">
+        <div :class="{active: answer[qsIndex][pos] === 30}" @click="check(pos, 30)">良好</div>
+        <div :class="{active: answer[qsIndex][pos] === 20}" @click="check(pos, 20)">一般</div>
+        <div :class="{active: answer[qsIndex][pos] === 10}" @click="check(pos, 10)">不能完成</div>
+      </div>
+    </div>
+  </div>
+
+  <div v-show="index === 10" class="result">
+    <div class="item bg-1" :style="{height: `${height[0] * h1 - h10}px`}"></div>
+    <div class="item bg-2" :style="{height: `${height[1] * h1 - h10}px`}"></div>
+    <div class="item bg-3" :style="{height: `${height[2] * h1 - h10}px`}"></div>
+    <div class="item bg-4" :style="{height: `${height[3] * h1 - h10}px`}"></div>
+    <div class="item bg-5" :style="{height: `${height[4] * h1 - h10}px`}"></div>
+
+    <div class="label">
+      <div v-for="name in questionName">{{name}}</div>
+    </div>
+  </div>
+
+  <div v-show="index === 11" class="lesson-list">
+    <div>
+      <div @click="index = 12"></div>
+      <div @click="index = 15"></div>
+      <div @click="index = 18"></div>
+    </div>
+    <div>
+      <div @click="index = 13"></div>
+      <div @click="index = 16"></div>
+      <div @click="index = 19"></div>
+    </div>
+    <div>
+      <div @click="index = 14"></div>
+      <div @click="index = 17"></div>
+      <div @click="index = 20"></div>
+    </div>
   </div>
 
 </div>
@@ -49,12 +91,12 @@
 </body>
 
 <script>
-  // const { ipcRenderer } = require('electron')
+  const { ipcRenderer } = require('electron')
 
   new Vue({
     el: '#app',
     data: {
-      index: 9,
+      index: 0,
       src: [
         'assets/images/introduce/introduce-1.jpg',
         'assets/images/introduce/introduce-2.jpg',
@@ -63,10 +105,21 @@
         'assets/images/introduce/introduce-5.jpg',
         'assets/images/introduce/introduce-6.jpg',
         'assets/images/introduce/introduce-7.jpg',
-        'assets/images/testing/login.jpg',
+        'assets/images/testing/login.jpg', // 7
         'assets/images/testing/age6.jpg',
-        'assets/images/testing/question.jpg',
-        'assets/images/testing/result.jpg'
+        'assets/images/testing/question.jpg', // 9
+        'assets/images/testing/result.jpg',
+        'assets/images/lesson/lesson-list.jpg', // 11
+        'assets/images/lesson/lesson-1.jpg', // 12
+        'assets/images/lesson/lesson-2.jpg', // 13
+        'assets/images/lesson/lesson-3.jpg', // 14
+        'assets/images/lesson/lesson-4.jpg', // 15
+        'assets/images/lesson/lesson-5.jpg', // 16
+        'assets/images/lesson/lesson-6.jpg', // 17
+        'assets/images/lesson/lesson-7.jpg', // 18
+        'assets/images/lesson/lesson-8.jpg', // 19
+        'assets/images/lesson/lesson-9.jpg', // 20
+        'assets/images/lesson/lesson-price.jpg', // 21
       ],
       childName: '',
       age: 'age6',
@@ -81,24 +134,54 @@
         age60: '4-5个月',
       },
       showAgeSelect: false,
-      question: {}
+      showQuestion: true,
+      qsIndex: 0,
+      answer: [[], [], [], [], []],
+      height: [],
+      h1: 4,
+      h10: 40
     },
     mounted() {
-      this.question = window._question
     },
     methods: {
       min() {
-        // ipcRenderer.send('win-min')
+        ipcRenderer.send('win-min')
       },
-      max() {
-        // ipcRenderer.send('win-max')
-      },
+      // max() {
+      //   ipcRenderer.send('win-max')
+      // },
       quit() {
-        // ipcRenderer.send('win-close')
+        ipcRenderer.send('win-close')
+      },
+      refreshQs() {
+        this.showQuestion = false
+        this.$nextTick(() => {
+          this.showQuestion = true
+        })
+      },
+      check(pos, score) {
+        this.answer[this.qsIndex][pos] = score
+        this.refreshQs()
       },
       prev() {
+        if (this.index === 9) {
+          if (this.qsIndex > 0) {
+            this.qsIndex--
+            return
+          }
+        }
+        if (this.index === 11 && !this.childName) {
+          this.index = 7
+          return
+        }
+        if (this.index === 21) {
+          this.index = 11
+          return
+        }
         if (this.index > 0) {
           this.index--
+        } else {
+          this.index = 21
         }
       },
       next() {
@@ -106,8 +189,17 @@
           this.toTesting()
           return
         }
+        if (this.index === 9) {
+          if (this.qsIndex < 4) {
+            this.qsIndex++
+            return
+          }
+          this.height = this.answer.map(item => eval(item.join('+')))
+        }
         if (this.index < this.src.length - 1) {
           this.index++
+        } else {
+          this.index = 0
         }
       },
       toTesting() {
@@ -116,12 +208,28 @@
           alert('请输入宝宝姓名')
           return
         }
+
+        if (this.height.length) {
+          if (confirm('确定要重新测评吗？')) {
+            this.answer = [[], [], [], [], []]
+            this.height = []
+          }
+        }
         this.index++
       }
     },
     watch: {
       age(val) {
         this.src[8] = `assets/images/testing/${val}.jpg`
+      }
+    },
+    computed: {
+      question() {
+        return window._question[this.age][this.qsIndex]
+      },
+      questionName() {
+        let qs = window._question[this.age]
+        return qs.map(item => item.name) || []
       }
     }
   })

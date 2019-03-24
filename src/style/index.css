@@ -14,6 +14,7 @@ body, img {
   /*width: 1341px;*/
   /*height: 793px;*/
 }
+
 .container .img-part {
   width: 100%;
   height: 100%;
@@ -27,12 +28,14 @@ body, img {
   height: 66px;
   -webkit-app-region: drag
 }
+
 .top-bar .btn {
   float: right;
   width: 225px;
   height: 66px;
   text-align: center;
 }
+
 .top-bar .btn span {
   display: inline-block;
   width: 34px;
@@ -46,9 +49,11 @@ body, img {
   border-radius: 25px;
   cursor: pointer;
 }
+
 .top-bar .btn span:nth-child(2) {
   cursor: default;
 }
+
 .top-bar .btn span:hover {
   color: #ccc;
 }
@@ -63,19 +68,24 @@ body, img {
   background: url("../assets/images/btn-arrow.png") no-repeat center;
   background-size: 100% 100%;
 }
+
 .opt:hover {
   transform: scale(1.05);
 }
+
 .left {
   left: 63px;
   transform: rotateY(180deg);
 }
+
 .left2 {
   left: 543px;
 }
+
 .left:hover {
   transform: scale(1.05) rotateY(180deg);
 }
+
 .right {
   right: 63px;
 }
@@ -91,10 +101,12 @@ body, img {
   justify-content: space-between;
   overflow: hidden;
 }
+
 .bottom-bar-left-2 {
   margin-left: -355px;
-  background: rgba(0,0,0,.5);
+  /*background: rgba(0,0,0,.5);*/
 }
+
 .bottom-bar .item {
   width: 95px;
   height: 95px;
@@ -106,6 +118,7 @@ body, img {
   opacity: 0;
   cursor: pointer;
 }
+
 .bottom-bar .item:hover {
   opacity: 1;
 }
@@ -118,6 +131,7 @@ body, img {
   height: 355px;
   font-size: 24px;
 }
+
 .login input {
   position: absolute;
   width: 180px;
@@ -131,6 +145,7 @@ body, img {
   border: 0;
   outline: 0;
 }
+
 .login .age {
   position: absolute;
   width: 204px;
@@ -142,6 +157,7 @@ body, img {
   text-align: center;
   cursor: pointer;
 }
+
 .login .age-select {
   position: absolute;
   width: 204px;
@@ -155,15 +171,19 @@ body, img {
   box-shadow: 0 0 5px 2px #dddddd;
   z-index: 1;
 }
+
 .login .age-select div {
   cursor: pointer;
 }
+
 .login .age-select div:hover {
-  background: #d017dd;
+  background: #BB1E6F;
 }
+
 .login .age-select .active {
-  background: #d017dd;
+  background: #BB1E6F;
 }
+
 .login .btn-enter {
   position: absolute;
   width: 218px;
@@ -174,6 +194,145 @@ body, img {
   background-size: 100% 100%;
   cursor: pointer;
 }
+
 .login .btn-enter:hover {
   transform: scale(1.05);
+}
+
+.testing {
+  position: absolute;
+  width: 57%;
+  height: 57%;
+  top: 18%;
+  left: 34.2%;
+}
+
+.testing .title {
+  position: absolute;
+  left: 20px;
+  top: -50px;
+  font-size: 40px;
+  color: #BB1E6F;
+}
+
+.testing .item {
+  height: 27%;
+  background: white;
+  margin: 1.5% 1.8% 3.8% 1.8%;
+  border-radius: 10px;
+}
+
+.testing .item .question {
+  font-size: 18px;
+  color: #333;
+  padding: 25px 10px 35px 25px;
+}
+
+.testing .item .answer {
+  font-size: 20px;
+  color: #eee;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 50px;
+  /*background: rgba(0,0,0,.5);*/
+}
+
+.testing .item .answer div {
+  width: 180px;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  border-radius: 20px;
+  background: -webkit-linear-gradient(left, #B0136A, #912C60);
+  cursor: pointer;
+}
+
+.testing .item .answer .active {
+  background: -webkit-linear-gradient(left, #16b007, #157f07);
+}
+
+.result {
+  position: absolute;
+  width: 47.7%;
+  height: 40%;
+  bottom: 30.9%;
+  left: 29.3%;
+  /*background: rgba(0, 0, 0, .5);*/
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.result .item {
+  /*height: 200px;*/
+  width: 10%;
+  border: 1px solid #aaa;
+  border-bottom: 0;
+}
+
+.result .bg-1 {
+  background: #DC6C9E;
+}
+
+.result .bg-2 {
+  background: #F29538;
+}
+
+.result .bg-3 {
+  background: #E5E255;
+}
+
+.result .bg-4 {
+  background: #73C187;
+}
+
+.result .bg-5 {
+  background: #468DCB;
+}
+
+.result .label {
+  position: absolute;
+  left: 0;
+  bottom: -62px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  color: #333333;
+  display: flex;
+}
+
+.result .label div {
+  flex: 1;
+  text-align: center;
+}
+
+.lesson-list {
+  position: absolute;
+  width: 72.8%;
+  height: 30%;
+  top: 36.7%;
+  left: 13.6%;
+}
+.lesson-list>div {
+  width: 100%;
+  height: 88px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.lesson-list>div>div {
+  height: 88px;
+  /*background: rgba(0, 0, 0, .5);*/
+  cursor: pointer;
+}
+.lesson-list>div>div:nth-child(1) {
+  width: 29.5%;
+}
+.lesson-list>div>div:nth-child(2) {
+  width: 29.8%;
+}
+.lesson-list>div>div:nth-child(3) {
+  width: 36.9%;
 }
