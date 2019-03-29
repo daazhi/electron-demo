@@ -91,7 +91,7 @@
 </body>
 
 <script>
-  const { ipcRenderer } = require('electron')
+  // const { ipcRenderer } = require('electron')
 
   new Vue({
     el: '#app',
@@ -170,9 +170,11 @@
             return
           }
         }
-        if (this.index === 11 && !this.childName) {
-          this.index = 7
-          return
+        if (this.index === 11) {
+          if (this.height.length === 0 || !this.childName) {
+            this.index = 7
+            return
+          }
         }
         if (this.index === 21) {
           this.index = 11
@@ -190,9 +192,16 @@
           return
         }
         if (this.index === 9) {
-          if (this.qsIndex < 4) {
-            this.qsIndex++
-            return
+          if (this.qsIndex <= 4) {
+            let a = this.answer[this.qsIndex]
+            if (!a[0] || !a[1] || !a[2]) {
+              alert('还有问题没有回答哦')
+              return
+            }
+            if (this.qsIndex < 4) {
+              this.qsIndex++
+              return
+            }
           }
           this.height = this.answer.map(item => eval(item.join('+')))
         }
@@ -216,6 +225,7 @@
           }
         }
         this.index++
+        this.qsIndex = 0
       }
     },
     watch: {
