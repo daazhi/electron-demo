@@ -57,6 +57,7 @@
   </div>
 
   <div v-show="index === 10" class="result">
+    <span class="baby-name">{{childName}}的测评结果</span>
     <div class="item bg-1" :style="{height: `${(height[0] || 0) * h1 - h10}px`}"></div>
     <div class="item bg-2" :style="{height: `${(height[1] || 0) * h1 - h10}px`}"></div>
     <div class="item bg-3" :style="{height: `${(height[2] || 0) * h1 - h10}px`}"></div>

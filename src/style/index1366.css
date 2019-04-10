@@ -265,6 +265,14 @@ body, img {
   align-items: flex-end;
 }
 
+.result .baby-name {
+  position: absolute;
+  top: -130px;
+  right: -55px;
+  color: #19297E;
+  font-size: 16px;
+}
+
 .result .item {
   /*height: 200px;*/
   width: 10%;
@@ -273,23 +281,23 @@ body, img {
 }
 
 .result .bg-1 {
-  background: #DC6C9E;
+  background: #D85090;
 }
 
 .result .bg-2 {
-  background: #F29538;
+  background: #F18336;
 }
 
 .result .bg-3 {
-  background: #E5E255;
+  background: #D9D100;
 }
 
 .result .bg-4 {
-  background: #73C187;
+  background: #32B372;
 }
 
 .result .bg-5 {
-  background: #468DCB;
+  background: #0168B7;
 }
 
 .result .label {
